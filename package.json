@@ -1,0 +1,31 @@
+{
+	"name": "easyski_api_2022",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/index.ts",
+	"scripts": {
+		"dev": "nodemon src/index.ts",
+		"build": "rm -rf build/ && prettier --write source/ && tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Easyski/api_final_work.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Easyski/api_final_work/issues"
+	},
+	"homepage": "https://github.com/Easyski/api_final_work#readme",
+	"dependencies": {
+		"@types/express": "4.17.13",
+		"express": "4.18.1",
+		"nodemon": "2.0.16",
+		"ts-node": "10.8.1",
+		"typescript": "4.7.3"
+	},
+	"devDependencies": {
+		"@types/node": "17.0.39"
+	}
+}
