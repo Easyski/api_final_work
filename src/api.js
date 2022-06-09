@@ -1,32 +1,31 @@
 const EXPRESS = require("express");
+const SERVERLESS = require("serverless-http");
 const CORS = require("cors");
-const fetch = require("node-fetch");
+const FETCH = require("node-fetch");
 
 const APP = EXPRESS();
+const ROUTER = EXPRESS.Router();
 
 // -------------------------------------------------------------------
 // :: MIDDLEWARE
 // -------------------------------------------------------------------
 
 APP.use(CORS());
-
-APP.use(
-	EXPRESS.urlencoded({
-		extended: true,
-	})
-);
 APP.use(EXPRESS.json());
+APP.use("/.netlify/functions/api", ROUTER);
 
 // -------------------------------------------------------------------
 // :: ROUTES
 // -------------------------------------------------------------------
 
-APP.get("/", (req, res, next) => {
-	res.redirect("https://www.easyski.be");
+ROUTER.get("/", (req, res) => {
+	res.json({
+		status: 200,
+	});
 });
 
 // .../alt/?lat=50.432134326&lng=14.134326365
-APP.get("/alt", async (req, res, next) => {
+ROUTER.get("/alt", async (req, res, next) => {
 	// CHECK IF PARAMS ARE PRESENT
 	if (!req.query.lat)
 		res.json({
@@ -58,4 +57,8 @@ APP.get("/alt", async (req, res, next) => {
 	});
 });
 
-module.exports = APP;
+// -------------------------------------------------------------------
+// :: EXPORT
+// -------------------------------------------------------------------
+
+module.exports.handler = SERVERLESS(APP);
