@@ -1,0 +1,27 @@
+{
+	"name": "easyski_api_2022",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Easyski/api_final_work.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Easyski/api_final_work/issues"
+	},
+	"homepage": "https://github.com/Easyski/api_final_work#readme",
+	"dependencies": {
+		"cors": "2.8.5",
+		"dotenv": "^16.0.1",
+		"express": "4.18.1",
+		"node-fetch": "2.0.0",
+		"nodemon": "2.0.16"
+	}
+}
