@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "node index.js",
+		"dev": "nodemon index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -17,11 +17,16 @@
 		"url": "https://github.com/Easyski/api_final_work/issues"
 	},
 	"homepage": "https://github.com/Easyski/api_final_work#readme",
+	"engines": {
+		"node": "14.19.0"
+	},
 	"dependencies": {
 		"cors": "2.8.5",
-		"dotenv": "^16.0.1",
+		"dotenv": "16.0.1",
 		"express": "4.18.1",
+		"fs": "0.0.1-security",
 		"node-fetch": "2.0.0",
-		"nodemon": "2.0.16"
+		"nodemon": "2.0.16",
+		"togpx": "0.5.4"
 	}
 }

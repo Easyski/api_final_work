@@ -1,5 +1,7 @@
 const EXPRESS = require("express");
 const CORS = require("cors");
+const TOGPX = require("togpx");
+const FS = require("fs");
 const fetch = require("node-fetch");
 
 const APP = EXPRESS();
@@ -21,12 +23,42 @@ APP.use(EXPRESS.json());
 // :: ROUTES
 // -------------------------------------------------------------------
 
-APP.get("/", (req, res, next) => {
+APP.get("/", (req, res) => {
 	res.redirect("https://www.easyski.be");
 });
 
+APP.post("/gpx", (req, res) => {
+	console.clear();
+
+	if (!req.body.geoJson)
+		res.json({
+			error: "No GeoJSON was passed",
+		});
+	if (!req.body.name)
+		res.json({
+			error: "No route name was passed",
+		});
+
+	const convertedName = req.body.name.replace(/\s/g, "_");
+	console.log("NAME", convertedName);
+
+	try {
+		const gpx_data = TOGPX(req.body.geoJson);
+
+		if (!FS.existsSync("gpx")) {
+			FS.mkdirSync("gpx");
+		}
+		FS.writeFileSync(`./gpx/${convertedName}.gpx`, gpx_data);
+		res.download(`./gpx/${convertedName}.gpx`);
+	} catch (err) {
+		res.json({
+			error: err,
+		});
+	}
+});
+
 // .../alt/?lat=50.432134326&lng=14.134326365
-APP.get("/alt", async (req, res, next) => {
+APP.get("/alt", async (req, res) => {
 	// CHECK IF PARAMS ARE PRESENT
 	if (!req.query.lat)
 		res.json({
